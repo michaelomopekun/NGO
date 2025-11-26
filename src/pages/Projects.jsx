@@ -6,17 +6,20 @@ export default function Projects() {
     {
       title: 'UK Initiatives',
       description: 'Empowering local communities through skills workshops, mentorship programs, and social enterprise development.',
-      stats: '50+ Communities Served'
+      stats: '50+ Communities Served',
+      url: "http://nexgeninternational.org/wp-content/uploads/2021/01/pexels-mentatdgt-1569076-300x200.jpg"
     },
     {
       title: 'West Africa Development',
       description: 'Sustainable development projects focusing on education, healthcare access, and economic empowerment in rural areas.',
-      stats: '10,000+ Lives Impacted'
+      stats: '10,000+ Lives Impacted',
+      url: "http://nexgeninternational.org/wp-content/uploads/2021/01/pexels-%D0%B2%D0%B0%D1%85%D1%82%D0%B1%D0%BE%D0%B2%D0%B8%D1%87-%D0%BC%D0%B0%D0%BA%D1%81%D0%B8%D0%BC-5998041-227x300.jpg"
     },
     {
       title: 'Youth Empowerment',
       description: 'Targeted programs for young people to develop leadership skills and entrepreneurial mindsets.',
-      stats: '2,000+ Youth Trained'
+      stats: '2,000+ Youth Trained',
+      url: "https://nexgeninternational.org/wp-content/uploads/2021/01/girl-in-black-coat-wearing-eyeglasses-3772525-scaled.jpg"
     }
   ];
 
@@ -84,7 +87,7 @@ export default function Projects() {
                 className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-gray-200"
               >
                 <div className="h-64 overflow-hidden">
-                  <img src={defaultImage} alt={project.title} className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+                  <img src={project.url} alt={project.title} className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
                 </div>
                 <div className="p-10">
                   <h3 className="text-2xl font-bold mb-4" style={{fontFamily: "'Poppins', sans-serif"}}>{project.title}</h3>
