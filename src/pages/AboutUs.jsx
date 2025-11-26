@@ -1,125 +1,265 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import defaultImage from '../assets/default-image.svg';
+import hero from '../assets/Hero.png';
 
 export default function AboutUs() {
+  const fadeInUp = {
+    initial: { opacity: 0, y: 60 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.7, ease: "easeOut" }
+  };
+
+  const slideInLeft = {
+    initial: { opacity: 0, x: -100 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.7, ease: "easeOut" }
+  };
+
+  const slideInRight = {
+    initial: { opacity: 0, x: 100 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.7, ease: "easeOut" }
+  };
+
+  const popIn = {
+    initial: { opacity: 0, scale: 0.8 },
+    whileInView: { opacity: 1, scale: 1 },
+    viewport: { once: true },
+    transition: { duration: 0.5, ease: "easeOut" }
+  };
+
   return (
     <main className="flex flex-col">
       {/* Hero Section */}
-      <section className="bg-gray-50 py-16 px-10 text-center">
+      <motion.section 
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="bg-gradient-to-br from-gray-50 to-gray-100 py-32 px-4 md:px-10 text-center"
+      >
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6" style={{fontFamily: "'Poppins', sans-serif"}}>About Us</h1>
-          <p className="text-lg text-gray-700">
+          <motion.h1 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="text-5xl md:text-6xl font-bold mb-6" 
+            style={{fontFamily: "'Poppins', sans-serif"}}
+          >
+            About Us
+          </motion.h1>
+          <motion.p 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="text-lg text-gray-700 leading-relaxed"
+          >
             We are NexGen International, a social enterprise dedicated to empowering communities and transforming lives through innovative programs and strategic partnerships.
-          </p>
+          </motion.p>
         </div>
-      </section>
+      </motion.section>
 
       {/* Who We Are Section */}
-      <section className="bg-white py-16 px-10">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="bg-white py-40 px-4 md:px-10"
+      >
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-            <div className="rounded-lg overflow-hidden h-80">
-              <img src={defaultImage} alt="Who We Are" className="w-full h-full object-cover" />
-            </div>
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{fontFamily: "'Poppins', sans-serif"}}>Who We Are</h2>
-              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+          <div className="grid md:grid-cols-2 gap-20 items-center">
+            <motion.div 
+              variants={slideInLeft}
+              className="rounded-xl overflow-hidden h-96 shadow-2xl hover:shadow-3xl transition-shadow"
+            >
+              <img src={hero} alt="Who We Are" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            </motion.div>
+            <motion.div 
+              variants={slideInRight}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-8" style={{fontFamily: "'Poppins', sans-serif"}}>Who We Are</h2>
+              <p className="text-gray-700 text-lg leading-relaxed mb-6">
                 At the core of our organization lies a deep-rooted commitment to transforming lives and uplifting communities. We are driven by a VISION to create positive and lasting change for a better future.
               </p>
               <p className="text-gray-700 text-lg leading-relaxed">
                 Through collaborative partnerships with faith-based groups, corporations, government parastatals, and individuals, we strive to develop innovative thinking, cultivate an entrepreneurial mindset, and promote sustainable ways of living.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Mission and Vision */}
-      <section className="bg-gray-50 py-16 px-10">
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="bg-gray-50 py-40 px-4 md:px-10"
+      >
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12">
-            <div className="p-8 bg-white rounded-lg">
-              <h3 className="text-2xl font-bold mb-4" style={{fontFamily: "'Poppins', sans-serif", color: 'var(--brand-teal)'}}>Our Mission</h3>
+            <motion.div 
+              variants={popIn}
+              whileHover={{ y: -15, boxShadow: "0 25px 50px rgba(0,128,128,0.15)" }}
+              className="p-12 bg-white rounded-xl shadow-lg transition-all"
+            >
+              <motion.div className="text-4xl mb-4">🎯</motion.div>
+              <h3 className="text-2xl font-bold mb-6" style={{fontFamily: "'Poppins', sans-serif", color: 'var(--brand-teal)'}}>Our Mission</h3>
               <p className="text-gray-700 text-lg leading-relaxed">
                 To empower groups and individuals by enhancing their capabilities, enabling them to actively participate in community development initiatives and projects. We believe in the power of diversity and aim to bring together people from all walks of life.
               </p>
-            </div>
-            <div className="p-8 bg-white rounded-lg">
-              <h3 className="text-2xl font-bold mb-4" style={{fontFamily: "'Poppins', sans-serif", color: 'var(--brand-orange)'}}>Our Vision</h3>
+            </motion.div>
+            <motion.div 
+              variants={popIn}
+              whileHover={{ y: -15, boxShadow: "0 25px 50px rgba(217,111,59,0.15)" }}
+              className="p-12 bg-white rounded-xl shadow-lg transition-all"
+            >
+              <motion.div className="text-4xl mb-4">✨</motion.div>
+              <h3 className="text-2xl font-bold mb-6" style={{fontFamily: "'Poppins', sans-serif", color: 'var(--brand-orange)'}}>Our Vision</h3>
               <p className="text-gray-700 text-lg leading-relaxed">
                 To create a brighter future for all, one community at a time. We work to develop skills, mobilize potential, and empower individuals to actively participate in community development and regeneration activities.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Values Section */}
-      <section className="bg-white py-16 px-10">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="bg-white py-40 px-4 md:px-10"
+      >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12" style={{fontFamily: "'Poppins', sans-serif"}}>Our Core Values</h2>
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="p-6 bg-gray-50 rounded-lg text-center">
-              <h4 className="text-xl font-bold mb-3" style={{fontFamily: "'Poppins', sans-serif"}}>Integrity</h4>
-              <p className="text-gray-600">We uphold the highest ethical standards in all our actions.</p>
-            </div>
-            <div className="p-6 bg-gray-50 rounded-lg text-center">
-              <h4 className="text-xl font-bold mb-3" style={{fontFamily: "'Poppins', sans-serif"}}>Collaboration</h4>
-              <p className="text-gray-600">We believe in the power of partnerships to achieve shared goals.</p>
-            </div>
-            <div className="p-6 bg-gray-50 rounded-lg text-center">
-              <h4 className="text-xl font-bold mb-3" style={{fontFamily: "'Poppins', sans-serif"}}>Impact</h4>
-              <p className="text-gray-600">We are committed to creating measurable and lasting positive change.</p>
-            </div>
-            <div className="p-6 bg-gray-50 rounded-lg text-center">
-              <h4 className="text-xl font-bold mb-3" style={{fontFamily: "'Poppins', sans-serif"}}>Sustainability</h4>
-              <p className="text-gray-600">We prioritize long-term solutions that are environmentally and socially sustainable.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Preview */}
-      <section className="bg-gray-50 py-16 px-10">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6" style={{fontFamily: "'Poppins', sans-serif"}}>Our Dedicated Team</h2>
-          <p className="text-center text-gray-600 text-lg mb-12">
-            Our dedicated team of 20 professionals is the driving force behind our efforts.
-          </p>
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-white rounded-lg overflow-hidden shadow-md text-center">
-                <div className="h-64 overflow-hidden">
-                  <img src={defaultImage} alt="Team Member" className="w-full h-full object-cover" />
-                </div>
-                <div className="p-6">
-                  <h4 className="text-xl font-bold mb-1" style={{fontFamily: "'Poppins', sans-serif"}}>Team Member {i}</h4>
-                  <p className="text-sm" style={{color: 'var(--brand-teal)'}}>Position</p>
-                </div>
-              </div>
+          <motion.h2 
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-bold text-center mb-20" 
+            style={{fontFamily: "'Poppins', sans-serif"}}
+          >
+            Our Core Values
+          </motion.h2>
+          <div className="grid md:grid-cols-4 gap-10">
+            {['Integrity', 'Collaboration', 'Impact', 'Sustainability'].map((value, index) => (
+              <motion.div 
+                key={index}
+                variants={fadeInUp}
+                initial="initial"
+                whileInView="whileInView"
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.15 }}
+                whileHover={{ y: -10 }}
+                className="p-10 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl text-center hover:shadow-xl transition-all"
+              >
+                <h4 className="text-2xl font-bold mb-4" style={{fontFamily: "'Poppins', sans-serif"}}>{value}</h4>
+                <p className="text-gray-600 text-lg">We uphold the highest ethical standards in all our actions.</p>
+              </motion.div>
             ))}
           </div>
-          <div className="text-center">
-            <Link to="/team" className="inline-block px-8 py-3 rounded-full font-bold transition-transform hover:scale-105" style={{backgroundColor: 'var(--brand-teal)', color: 'white'}}>
+        </div>
+      </motion.section>
+
+      {/* Team Preview */}
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="bg-gray-50 py-40 px-4 md:px-10"
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.h2 
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-bold text-center mb-6" 
+            style={{fontFamily: "'Poppins', sans-serif"}}
+          >
+            Our Dedicated Team
+          </motion.h2>
+          <motion.p 
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-center text-gray-600 text-lg mb-20"
+          >
+            Our dedicated team of 20 professionals is the driving force behind our efforts.
+          </motion.p>
+          <div className="grid md:grid-cols-3 gap-10 mb-16">
+            {[1, 2, 3].map((i) => (
+              <motion.div 
+                key={i} 
+                variants={fadeInUp}
+                initial="initial"
+                whileInView="whileInView"
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ y: -15 }}
+                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all"
+              >
+                <div className="h-64 overflow-hidden">
+                  <img src={"http://nexgeninternational.org/wp-content/uploads/2024/06/WhatsApp-Image-2024-06-17-at-10.13.11-1024x949.jpeg"} alt="Team Member" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+                </div>
+                <div className="p-6">
+                  <h4 className="text-xl font-bold mb-1" style={{fontFamily: "'Poppins', sans-serif"}}> HOLA LANA</h4>
+                  <p className="text-sm font-semibold" style={{color: 'var(--brand-teal)'}}>CEO</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className="text-center"
+          >
+            <Link to="/team" className="inline-block px-12 py-4 rounded-full font-bold transition-all hover:shadow-lg shadow-md" style={{backgroundColor: 'var(--brand-teal)', color: 'white'}}>
               View Full Team
             </Link>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Location Section */}
-      <section className="bg-white py-16 px-10">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="bg-white py-40 px-4 md:px-10"
+      >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8" style={{fontFamily: "'Poppins', sans-serif"}}>Find Us</h2>
-          <div className="p-8 bg-gray-50 rounded-lg">
-            <p className="text-lg text-gray-700 mb-4">
+          <motion.h2 
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl font-bold mb-16" 
+            style={{fontFamily: "'Poppins', sans-serif"}}
+          >
+            Find Us
+          </motion.h2>
+          <motion.div 
+            initial={{ scale: 0.95, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -5 }}
+            className="p-16 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl shadow-lg transition-all"
+          >
+            <p className="text-lg text-gray-700 mb-6">
               <strong>Headquartered at:</strong>
             </p>
-            <p className="text-xl font-semibold text-gray-800 mb-2">The Sojourner Truth Centre</p>
-            <p className="text-gray-700">161 Sumner Road, London SE15 6JL, United Kingdom</p>
-          </div>
+            <p className="text-3xl font-bold text-gray-800 mb-4">The Sojourner Truth Centre</p>
+            <p className="text-gray-700 text-xl leading-relaxed">161 Sumner Road, London SE15 6JL, United Kingdom</p>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 }

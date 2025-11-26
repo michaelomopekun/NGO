@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import defaultImage from '../assets/default-image.svg';
 
 export default function Services() {
@@ -35,76 +36,193 @@ export default function Services() {
     }
   ];
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
+
   return (
     <main className="flex flex-col">
       {/* Hero Section */}
-      <section className="bg-linear-to-b from-gray-100 to-white py-16 px-10">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="bg-gradient-to-b from-gray-100 to-white py-32 px-4 md:px-10"
+      >
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6" style={{fontFamily: "'Poppins', sans-serif"}}>Our Services</h1>
-          <p className="text-lg text-gray-700">
+          <motion.h1 
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="text-5xl md:text-6xl font-bold mb-8" 
+            style={{fontFamily: "'Poppins', sans-serif"}}
+          >
+            Our Services
+          </motion.h1>
+          <motion.p 
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="text-lg text-gray-700 leading-relaxed"
+          >
             Partners in Progress: Our services are renowned for delivering exceptional value, going above and beyond expectations, and providing an eye-opening experience that transforms lives and organizations.
-          </p>
+          </motion.p>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Services Grid */}
-      <section className="bg-white py-16 px-10">
+      {/* Services Grid - Enhanced Spacing */}
+      <motion.section 
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="bg-white py-40 px-4 md:px-10"
+      >
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-16">
             {services.map((service, idx) => (
-              <div key={idx} className="p-8 border-2 rounded-lg hover:shadow-lg transition-shadow" style={{borderColor: idx % 3 === 0 ? 'var(--brand-teal)' : idx % 3 === 1 ? 'var(--brand-orange)' : 'var(--brand-gray)'}}>
-                <h3 className="text-2xl font-bold mb-3" style={{fontFamily: "'Poppins', sans-serif"}}>{service.title}</h3>
-                <p className="text-gray-700 mb-6">{service.description}</p>
-                <div className="border-t pt-4">
-                  <p className="text-sm font-semibold text-gray-600 mb-2">Key Areas:</p>
-                  <ul className="text-sm text-gray-600 space-y-1">
+              <motion.div 
+                key={idx} 
+                variants={item}
+                whileHover={{ y: -15, boxShadow: "0 25px 50px rgba(0,0,0,0.1)" }}
+                className="p-10 border-2 rounded-xl hover:shadow-2xl transition-all bg-white" 
+                style={{borderColor: idx % 3 === 0 ? 'var(--brand-teal)' : idx % 3 === 1 ? 'var(--brand-orange)' : 'var(--brand-gray)'}}
+              >
+                <motion.div className="text-4xl mb-4">
+                  {idx % 3 === 0 ? '🎓' : idx % 3 === 1 ? '💰' : '🚀'}
+                </motion.div>
+                <h3 className="text-2xl font-bold mb-4" style={{fontFamily: "'Poppins', sans-serif"}}>{service.title}</h3>
+                <p className="text-gray-700 mb-8 text-lg leading-relaxed">{service.description}</p>
+                <div className="border-t pt-6">
+                  <p className="text-sm font-semibold mb-4" style={{color: idx % 3 === 0 ? 'var(--brand-teal)' : idx % 3 === 1 ? 'var(--brand-orange)' : 'var(--brand-gray)'}}>Key Areas:</p>
+                  <ul className="text-sm text-gray-600 space-y-2">
                     {service.courses.map((course, i) => (
-                      <li key={i}>• {course}</li>
+                      <motion.li 
+                        key={i} 
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.05 }}
+                        className="flex items-start"
+                      >
+                        <span className="mr-2 font-bold">✓</span>
+                        {course}
+                      </motion.li>
                     ))}
                   </ul>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA Section */}
-      <section className="py-12 px-10" style={{backgroundColor: 'var(--brand-teal)'}}>
+      <motion.section 
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="py-32 px-4 md:px-10" 
+        style={{backgroundColor: 'var(--brand-teal)'}}
+      >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4" style={{fontFamily: "'Poppins', sans-serif"}}>Explore Our Training Programs</h2>
-          <p className="text-white text-lg mb-8 opacity-90">
+          <motion.h2 
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-bold text-white mb-8" 
+            style={{fontFamily: "'Poppins', sans-serif"}}
+          >
+            Explore Our Training Programs
+          </motion.h2>
+          <motion.p 
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-white text-xl mb-12 opacity-90 leading-relaxed"
+          >
             Discover the full range of our training courses and how we can propel your growth journey.
-          </p>
-          <Link to="/training" className="inline-block px-8 py-3 bg-white font-bold rounded-full transition-transform hover:scale-105" style={{color: 'var(--brand-teal)'}}>
-            Training & Career
-          </Link>
+          </motion.p>
+          <motion.div whileHover={{ scale: 1.05 }}>
+            <Link to="/training" className="inline-block px-12 py-4 bg-white font-bold rounded-full transition-all hover:shadow-lg shadow-md" style={{color: 'var(--brand-teal)'}}>
+              Training & Career
+            </Link>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Why Choose Us */}
-      <section className="bg-gray-50 py-16 px-10">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="bg-gray-50 py-40 px-4 md:px-10"
+      >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12" style={{fontFamily: "'Poppins', sans-serif"}}>Why Choose NexGen?</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="p-6 bg-white rounded-lg text-center">
-              <div className="text-4xl font-bold mb-3" style={{color: 'var(--brand-teal)'}}>20+</div>
-              <h4 className="text-lg font-bold mb-2">Years of Experience</h4>
-              <p className="text-gray-600">Over two decades of proven success in training and consultancy.</p>
-            </div>
-            <div className="p-6 bg-white rounded-lg text-center">
-              <div className="text-4xl font-bold mb-3" style={{color: 'var(--brand-orange)'}}>500+</div>
-              <h4 className="text-lg font-bold mb-2">Organizations Served</h4>
-              <p className="text-gray-600">Trusted by hundreds of organizations across the UK and Africa.</p>
-            </div>
-            <div className="p-6 bg-white rounded-lg text-center">
-              <div className="text-4xl font-bold mb-3" style={{color: 'var(--brand-gray)'}}>100%</div>
-              <h4 className="text-lg font-bold mb-2">Tailored Solutions</h4>
-              <p className="text-gray-600">Every program is customized to meet your unique needs.</p>
-            </div>
+          <motion.h2 
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-bold text-center mb-20" 
+            style={{fontFamily: "'Poppins', sans-serif"}}
+          >
+            Why Choose NexGen?
+          </motion.h2>
+          <div className="grid md:grid-cols-3 gap-12">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0 }}
+              whileHover={{ scale: 1.08, y: -10 }}
+              className="p-12 bg-white rounded-xl text-center shadow-lg hover:shadow-2xl transition-all"
+            >
+              <motion.div className="text-6xl font-bold mb-6" style={{color: 'var(--brand-teal)'}}>20+</motion.div>
+              <h4 className="text-2xl font-bold mb-4" style={{fontFamily: "'Poppins', sans-serif"}}>Years of Experience</h4>
+              <p className="text-gray-600 text-lg">Over two decades of proven success in training and consultancy.</p>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              whileHover={{ scale: 1.08, y: -10 }}
+              className="p-12 bg-white rounded-xl text-center shadow-lg hover:shadow-2xl transition-all"
+            >
+              <motion.div className="text-6xl font-bold mb-6" style={{color: 'var(--brand-orange)'}}>500+</motion.div>
+              <h4 className="text-2xl font-bold mb-4" style={{fontFamily: "'Poppins', sans-serif"}}>Organizations Served</h4>
+              <p className="text-gray-600 text-lg">Trusted by hundreds of organizations across the UK and Africa.</p>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              whileHover={{ scale: 1.08, y: -10 }}
+              className="p-12 bg-white rounded-xl text-center shadow-lg hover:shadow-2xl transition-all"
+            >
+              <motion.div className="text-6xl font-bold mb-6" style={{color: 'var(--brand-gray)'}}>100%</motion.div>
+              <h4 className="text-2xl font-bold mb-4" style={{fontFamily: "'Poppins', sans-serif"}}>Tailored Solutions</h4>
+              <p className="text-gray-600 text-lg">Every program is customized to meet your unique needs.</p>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 }

@@ -1,77 +1,170 @@
+import { motion } from 'framer-motion';
 import defaultImage from '../assets/default-image.svg';
 
 export default function Projects() {
+  const projects = [
+    {
+      title: 'UK Initiatives',
+      description: 'Empowering local communities through skills workshops, mentorship programs, and social enterprise development.',
+      stats: '50+ Communities Served'
+    },
+    {
+      title: 'West Africa Development',
+      description: 'Sustainable development projects focusing on education, healthcare access, and economic empowerment in rural areas.',
+      stats: '10,000+ Lives Impacted'
+    },
+    {
+      title: 'Youth Empowerment',
+      description: 'Targeted programs for young people to develop leadership skills and entrepreneurial mindsets.',
+      stats: '2,000+ Youth Trained'
+    }
+  ];
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
+
   return (
     <main className="flex flex-col">
       {/* Hero */}
-      <section className="bg-white py-16 px-10">
-        <div className="max-w-6xl mx-auto text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4" style={{fontFamily: "'Poppins', sans-serif"}}>Our Projects</h1>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            Discover the heart of our work. We're dedicated to creating lasting, positive change in communities across the UK and West Africa through targeted, impactful projects.
-          </p>
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="bg-gradient-to-r from-gray-100 to-gray-50 py-32 px-4 md:px-10 text-center"
+      >
+        <div className="max-w-4xl mx-auto">
+          <motion.h1 
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="text-5xl md:text-6xl font-bold mb-8" 
+            style={{fontFamily: "'Poppins', sans-serif"}}
+          >
+            Our Projects
+          </motion.h1>
+          <motion.p 
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="text-lg text-gray-700 leading-relaxed"
+          >
+            From local initiatives in the UK to large-scale development projects in West Africa, we are committed to creating lasting change.
+          </motion.p>
         </div>
-      </section>
+      </motion.section>
 
       {/* Projects Grid */}
-      <section className="bg-gray-50 py-16 px-10">
+      <motion.section 
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="bg-white py-40 px-4 md:px-10"
+      >
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* UK Projects */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-lg">
-              <div className="h-80 overflow-hidden">
-                <img src={defaultImage} alt="UK Projects" className="w-full h-full object-cover" />
-              </div>
-              <div className="p-8">
-                <h2 className="text-3xl font-bold mb-4" style={{fontFamily: "'Poppins', sans-serif"}}>UK Projects</h2>
-                <p className="text-gray-700 mb-6">
-                  In the UK, we're tackling societal challenges head-on. Our projects focus on youth mentorship, community integration for refugees, and promoting mental well-being in urban areas. We aim to build stronger, more resilient local communities from the ground up.
-                </p>
-                <button className="px-6 py-2 rounded-lg font-bold transition-transform hover:scale-105 text-white" style={{backgroundColor: 'var(--brand-teal)'}}>
-                  Explore UK Initiatives
-                </button>
-              </div>
-            </div>
-
-            {/* West Africa Projects */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-lg">
-              <div className="h-80 overflow-hidden">
-                <img src={defaultImage} alt="West Africa Projects" className="w-full h-full object-cover" />
-              </div>
-              <div className="p-8">
-                <h2 className="text-3xl font-bold mb-4" style={{fontFamily: "'Poppins', sans-serif"}}>West Africa Projects</h2>
-                <p className="text-gray-700 mb-6">
-                  Our work in West Africa is centered on sustainable development. We implement clean water solutions, support small-scale farmers with climate-resilient agriculture techniques, and enhance access to primary education for children in remote villages.
-                </p>
-                <button className="px-6 py-2 rounded-lg font-bold transition-transform hover:scale-105 text-white" style={{backgroundColor: 'var(--brand-orange)'}}>
-                  Discover West Africa Programs
-                </button>
-              </div>
-            </div>
+          <div className="grid md:grid-cols-3 gap-16">
+            {projects.map((project, idx) => (
+              <motion.div 
+                key={idx} 
+                variants={item}
+                whileHover={{ y: -15 }}
+                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-gray-200"
+              >
+                <div className="h-64 overflow-hidden">
+                  <img src={defaultImage} alt={project.title} className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+                </div>
+                <div className="p-10">
+                  <h3 className="text-2xl font-bold mb-4" style={{fontFamily: "'Poppins', sans-serif"}}>{project.title}</h3>
+                  <p className="text-gray-700 mb-8 text-lg leading-relaxed">{project.description}</p>
+                  <div className="pt-6 border-t border-gray-200">
+                    <p className="font-bold text-lg" style={{color: 'var(--brand-teal)'}}>{project.stats}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Impact Stats */}
-      <section className="bg-white py-16 px-10">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="bg-gray-50 py-40 px-4 md:px-10"
+      >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12" style={{fontFamily: "'Poppins', sans-serif"}}>Our Impact</h2>
-          <div className="grid md:grid-cols-3 gap-8 text-center">
-            <div className="p-8 bg-gray-50 rounded-lg">
-              <div className="text-4xl font-bold mb-3" style={{color: 'var(--brand-teal)'}}>150+</div>
-              <p className="text-lg font-semibold text-gray-800">Projects Completed</p>
-            </div>
-            <div className="p-8 bg-gray-50 rounded-lg">
-              <div className="text-4xl font-bold mb-3" style={{color: 'var(--brand-orange)'}}>40+</div>
-              <p className="text-lg font-semibold text-gray-800">Countries Impacted</p>
-            </div>
-            <div className="p-8 bg-gray-50 rounded-lg">
-              <div className="text-4xl font-bold mb-3" style={{color: 'var(--brand-gray)'}}>500K+</div>
-              <p className="text-lg font-semibold text-gray-800">Lives Transformed</p>
-            </div>
+          <motion.h2 
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-bold text-center mb-20" 
+            style={{fontFamily: "'Poppins', sans-serif"}}
+          >
+            Our Impact
+          </motion.h2>
+          <div className="grid md:grid-cols-4 gap-12 text-center">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0 }}
+              whileHover={{ scale: 1.15 }} 
+              className="p-8"
+            >
+              <div className="text-6xl font-bold mb-4" style={{color: 'var(--brand-orange)'}}>50+</div>
+              <p className="text-gray-600 font-bold text-lg">Projects Completed</p>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              whileHover={{ scale: 1.15 }} 
+              className="p-8"
+            >
+              <div className="text-6xl font-bold mb-4" style={{color: 'var(--brand-teal)'}}>10k+</div>
+              <p className="text-gray-600 font-bold text-lg">Lives Impacted</p>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              whileHover={{ scale: 1.15 }} 
+              className="p-8"
+            >
+              <div className="text-6xl font-bold mb-4" style={{color: 'var(--brand-gray)'}}>20+</div>
+              <p className="text-gray-600 font-bold text-lg">Years Active</p>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              whileHover={{ scale: 1.15 }} 
+              className="p-8"
+            >
+              <div className="text-6xl font-bold mb-4" style={{color: 'var(--brand-teal)'}}>100%</div>
+              <p className="text-gray-600 font-bold text-lg">Commitment</p>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 }

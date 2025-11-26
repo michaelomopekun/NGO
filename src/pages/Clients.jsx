@@ -1,96 +1,141 @@
+import { motion } from 'framer-motion';
 import defaultImage from '../assets/default-image.svg';
 
+const ClientLogo = ({ name }) => (
+  <motion.div 
+    whileHover={{ scale: 1.1 }}
+    className="flex flex-col items-center justify-center p-8 bg-white rounded-lg shadow-sm border border-gray-100 h-48"
+  >
+    <div className="w-24 h-24 mb-4 bg-contain bg-center bg-no-repeat opacity-80" style={{backgroundImage: `url(${defaultImage})`}}></div>
+    <span className="text-gray-600 font-medium text-center">{name}</span>
+  </motion.div>
+);
+
 export default function Clients() {
-  const clients = [
-    { name: 'Client 1', region: 'UK' },
-    { name: 'Client 2', region: 'UK' },
-    { name: 'Client 3', region: 'UK' },
-    { name: 'Client 4', region: 'West Africa' },
-    { name: 'Client 5', region: 'West Africa' },
-    { name: 'Client 6', region: 'West Africa' },
-    { name: 'Client 7', region: 'Europe' },
-    { name: 'Client 8', region: 'Europe' },
-  ];
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
 
-  const ukClients = clients.filter(c => c.region === 'UK').sort((a, b) => a.name.localeCompare(b.name));
-  const africaClients = clients.filter(c => c.region === 'West Africa').sort((a, b) => a.name.localeCompare(b.name));
-  const europeClients = clients.filter(c => c.region === 'Europe').sort((a, b) => a.name.localeCompare(b.name));
-
-  const ClientLogo = ({ name, className = "w-32 h-32" }) => (
-    <div className={`${className} bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center`}>
-      <img src={defaultImage} alt={name} className="w-full h-full object-cover" />
-    </div>
-  );
+  const item = {
+    hidden: { opacity: 0, scale: 0.9 },
+    show: { opacity: 1, scale: 1 }
+  };
 
   return (
     <main className="flex flex-col">
       {/* Hero */}
-      <section className="bg-gray-100 py-16 px-10">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4" style={{fontFamily: "'Poppins', sans-serif"}}>Our Clients & Partners</h1>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            We are proud to work with a diverse range of organizations, from government agencies to grassroots nonprofits, across multiple continents.
-          </p>
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="bg-linear-to-b from-gray-100 to-white py-24 px-4 md:px-10 text-center"
+      >
+        <div className="max-w-4xl mx-auto">
+          <motion.h1 
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="text-5xl md:text-6xl font-bold mb-6" 
+            style={{fontFamily: "'Poppins', sans-serif"}}
+          >
+            Our Clients & Partners
+          </motion.h1>
+          <motion.p 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="text-lg text-gray-700"
+          >
+            We are proud to work with a diverse range of organizations across the globe. Together, we are building a better future.
+          </motion.p>
         </div>
-      </section>
+      </motion.section>
 
       {/* UK Clients */}
-      <section className="bg-white py-16 px-10">
+      <motion.section 
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="bg-white py-24 px-4 md:px-10"
+      >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12" style={{fontFamily: "'Poppins', sans-serif"}}>United Kingdom</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-12">
-            {ukClients.map((client, idx) => (
-              <div key={idx} className="flex flex-col items-center gap-4">
-                <ClientLogo name={client.name} className="w-28 h-28" />
-                <p className="text-center text-sm text-gray-600">{client.name}</p>
-              </div>
+          <h2 className="text-3xl font-bold text-center mb-16" style={{fontFamily: "'Poppins', sans-serif", color: 'var(--brand-teal)'}}>United Kingdom</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {['Client UK 1', 'Client UK 2', 'Client UK 3', 'Client UK 4', 'Client UK 5', 'Client UK 6', 'Client UK 7', 'Client UK 8'].map((client, idx) => (
+              <motion.div key={idx} variants={item}>
+                <ClientLogo name={client} />
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* West Africa Clients */}
-      <section className="bg-gray-50 py-16 px-10">
+      <motion.section 
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="bg-gray-50 py-24 px-4 md:px-10"
+      >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12" style={{fontFamily: "'Poppins', sans-serif"}}>West Africa</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-12">
-            {africaClients.map((client, idx) => (
-              <div key={idx} className="flex flex-col items-center gap-4">
-                <ClientLogo name={client.name} className="w-28 h-28" />
-                <p className="text-center text-sm text-gray-600">{client.name}</p>
-              </div>
+          <h2 className="text-3xl font-bold text-center mb-16" style={{fontFamily: "'Poppins', sans-serif", color: 'var(--brand-orange)'}}>West Africa</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {['Client WA 1', 'Client WA 2', 'Client WA 3', 'Client WA 4', 'Client WA 5', 'Client WA 6', 'Client WA 7', 'Client WA 8'].map((client, idx) => (
+              <motion.div key={idx} variants={item}>
+                <ClientLogo name={client} />
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Europe Clients */}
-      <section className="bg-white py-16 px-10">
+      <motion.section 
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="bg-white py-24 px-4 md:px-10"
+      >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12" style={{fontFamily: "'Poppins', sans-serif"}}>Europe</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {europeClients.map((client, idx) => (
-              <div key={idx} className="flex flex-col items-center gap-4">
-                <ClientLogo name={client.name} className="w-28 h-28" />
-                <p className="text-center text-sm text-gray-600">{client.name}</p>
-              </div>
+          <h2 className="text-3xl font-bold text-center mb-16" style={{fontFamily: "'Poppins', sans-serif", color: 'var(--brand-gray)'}}>Europe</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {['Client EU 1', 'Client EU 2', 'Client EU 3', 'Client EU 4'].map((client, idx) => (
+              <motion.div key={idx} variants={item}>
+                <ClientLogo name={client} />
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Partnership CTA */}
-      <section className="py-16 px-10" style={{backgroundColor: 'var(--brand-teal)'}}>
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4" style={{fontFamily: "'Poppins', sans-serif"}}>Become a Partner</h2>
-          <p className="text-white text-lg mb-8 opacity-90">
-            We welcome partnerships with organizations that share our vision for positive change.
+      {/* CTA */}
+      <motion.section 
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="py-24 px-4 md:px-10 text-center" 
+        style={{backgroundColor: 'var(--brand-teal)'}}
+      >
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6" style={{fontFamily: "'Poppins', sans-serif"}}>Partner With Us</h2>
+          <p className="text-white text-xl mb-10 opacity-90">
+            Join our network of partners and let's achieve great things together.
           </p>
-          <button className="px-8 py-3 bg-white font-bold rounded-lg transition-transform hover:scale-105" style={{color: 'var(--brand-teal)'}}>
-            Explore Partnership Opportunities
+          <button className="px-10 py-4 bg-white font-bold rounded-full transition-transform hover:scale-105 shadow-lg" style={{color: 'var(--brand-teal)'}}>
+            Become a Partner
           </button>
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 }
