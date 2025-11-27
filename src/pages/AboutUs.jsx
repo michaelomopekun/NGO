@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import defaultImage from '../assets/default-image.svg';
+// import defaultImage from '../assets/default-image.svg';
 import hero from '../assets/Hero.png';
 
 export default function AboutUs() {
@@ -31,6 +31,27 @@ export default function AboutUs() {
     viewport: { once: true },
     transition: { duration: 0.5, ease: "easeOut" }
   };
+
+  const coreTeam = [
+    {
+      name: 'SHOLA LANA',
+      role: 'CEO/Portfolio Development Director',
+      bio: 'Shola is a seasoned professional with over 30 years of diverse experience in training, capacity building, and community empowerment. She serves as the Founding Projects Director of Nexgen International.',
+      image: 'http://nexgeninternational.org/wp-content/uploads/2024/06/WhatsApp-Image-2024-06-17-at-10.13.11-1024x949.jpeg'
+    },
+    {
+      name: "'NOLA ONOJOBI",
+      role: 'Partner/Project Development Strategist',
+      bio: 'Nola is a multi-talented professional with expertise in business development, project strategy, and sustainability. With over two decades of experience, Nola provides invaluable guidance to individuals and organizations.',
+      image: 'http://nexgeninternational.org/wp-content/uploads/2021/01/blank.png'
+    },
+    {
+      name: 'EKUNDAYO AKANDE',
+      role: 'Grant Writer',
+      bio: 'Distinguished International Arbitrator with 25+ years of experience in commercial contracts and stakeholder management.',
+      image: 'http://nexgeninternational.org/wp-content/uploads/2024/06/WhatsApp-Image-2024-06-17-at-10.12.25.jpeg'
+    },
+  ];
 
   return (
     <main className="flex flex-col">
@@ -195,23 +216,23 @@ export default function AboutUs() {
             Our dedicated team of 20 professionals is the driving force behind our efforts.
           </motion.p>
           <div className="grid md:grid-cols-3 gap-10 mb-16">
-            {[1, 2, 3].map((i) => (
+            {coreTeam.map((member, index) => (
               <motion.div 
-                key={i} 
+                key={index} 
                 variants={fadeInUp}
                 initial="initial"
                 whileInView="whileInView"
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -15 }}
                 className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all"
               >
                 <div className="h-64 overflow-hidden">
-                  <img src={"http://nexgeninternational.org/wp-content/uploads/2024/06/WhatsApp-Image-2024-06-17-at-10.13.11-1024x949.jpeg"} alt="Team Member" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+                  <img src={member.image} alt="Team Member" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
                 </div>
                 <div className="p-6">
-                  <h4 className="text-xl font-bold mb-1" style={{fontFamily: "'Poppins', sans-serif"}}> HOLA LANA</h4>
-                  <p className="text-sm font-semibold" style={{color: 'var(--brand-teal)'}}>CEO</p>
+                  <h4 className="text-xl font-bold mb-1" style={{fontFamily: "'Poppins', sans-serif"}}>{member.name}</h4>
+                  <p className="text-sm font-semibold" style={{color: 'var(--brand-teal)'}}>{member.role}</p>
                 </div>
               </motion.div>
             ))}
