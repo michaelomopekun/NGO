@@ -1,8 +1,18 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import defaultImage from '../assets/default-image.svg';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-export default function Services() {
+
+export default function Services() 
+{
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  
   const services = [
     {
       title: 'Training and Development',

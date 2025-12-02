@@ -1,9 +1,18 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 // import defaultImage from '../assets/default-image.svg';
 import hero from '../assets/Hero.png';
 
-export default function AboutUs() {
+export default function AboutUs() 
+{
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     whileInView: { opacity: 1, y: 0 },

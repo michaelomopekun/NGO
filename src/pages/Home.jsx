@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import defaultImage from '../assets/default-image.svg';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import HeroImage from '../assets/Hero.png';
 import partner1 from '../assets/partner_1.png';
 import partner2 from '../assets/partner_2.png';
@@ -9,7 +10,15 @@ import partner4 from '../assets/partner_4.png';
 import partner5 from '../assets/partner_5.jpg';
 import partner6 from '../assets/partner_6.png';
 
-export default function Home() {
+export default function Home() 
+{
+  const navigate = useNavigate();
+    const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     whileInView: { opacity: 1, y: 0 },
@@ -50,47 +59,50 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col w-full overflow-x-hidden">
+    <main className="flex flex-col w-full ">
       {/* Hero Section */}
-      <motion.section 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="relative w-full h-screen text-white overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(${HeroImage})`}}></div>
-        <div className="absolute inset-0 bg-black/40"></div>
-        <div className="relative flex h-full flex-col items-start justify-center gap-8 px-4 md:px-10 text-left">
-          <motion.div 
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="flex flex-col gap-4 max-w-2xl"
-          >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tighter" style={{fontFamily: "'Poppins', sans-serif"}}>
-              Welcome to NExGen International!
-            </h1>
-            <p className="text-lg md:text-xl font-normal leading-normal text-gray-200">
-              We Ignite Dreams and Transform Communities
-            </p>
-          </motion.div>
-          <motion.div 
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="flex flex-wrap gap-4"
-          >
-            <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-8 md:h-14 md:px-10 text-white text-base font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-105" style={{backgroundColor: 'var(--brand-teal)'}}>
-              <span className="truncate">Explore Our Services</span>
-            </button>
-            <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-8 md:h-14 md:px-10 bg-white text-base font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-105" style={{color: 'var(--brand-dark)'}}>
-              <span className="truncate">Contact Us</span>
-            </button>
-          </motion.div>
-        </div>
-      </motion.section>
+        <motion.section 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="relative w-full h-screen text-white overflow-hidden"
+        >
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat " 
+              style={{backgroundImage: `url(${HeroImage})`}}
+            ></div>
+          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="relative flex h-full flex-col items-start justify-center gap-8 px-4 md:px-10 text-left">
+            <motion.div 
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="flex flex-col gap-4 max-w-2xl"
+                >
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tighter" style={{fontFamily: "'Poppins', sans-serif"}}>
+                Welcome to <span style={{color: 'var(--brand-teal)'} }>NExGen</span> International!
+              </h1>
+              <p className="text-lg md:text-xl font-normal leading-normal text-gray-200">
+                We Ignite Dreams and Transform Communities
+              </p>
+            </motion.div>
+            <motion.div 
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="flex flex-wrap gap-4"
+            >
+          <button onClick={() => navigate('/services')} className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-8 md:h-14 md:px-10 text-white text-base font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-105" style={{backgroundColor: 'var(--brand-teal)'} }>
+            <span className="truncate">Explore Our Services</span>
+          </button>
+          <button onClick ={() => navigate('/contact')} className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-8 md:h-14 md:px-10 bg-white text-base font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-105" style={{color: 'var(--brand-dark)'}}>
+            <span className="truncate">Contact Us</span>
+          </button>
+            </motion.div>
+          </div>
+        </motion.section>
 
-      {/* Carousel Section - Enhanced Spacing */}
+        {/* Carousel Section - Enhanced Spacing */}
       <section className="bg-white py-32 px-4 sm:px-6 md:px-8 lg:px-10">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col gap-16 md:gap-18 lg:gap-20">
@@ -118,9 +130,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-                className="w-full rounded-lg overflow-hidden h-48 sm:h-64 md:h-72 lg:h-96 shadow-2xl hover:shadow-3xl transition-shadow"
+                className="w-full rounded-lg overflow-hidden h-48 sm:h-64 md:h-72 lg:h-96 shadow-2xl hover:shadow-2xl transition-shadow"
               >
-                <img src={"https://nexgeninternational.org/wp-content/uploads/2020/04/woman-wearing-gray-blazer-writing-on-dry-erase-board-1181534-scaled.jpg"} alt="Entrepreneurial Dreams" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+                <img src={"https://nexgeninternational.org/wp-content/uploads/2020/04/woman-wearing-gray-blazer-writing-on-dry-erase-board-1181534-scaled.jpg"} alt="Entrepreneurial Dreams" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" />
               </motion.div>
             </motion.div>
 
@@ -129,7 +141,7 @@ export default function Home() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center py-12 lg:auto-cols-fr [&>:nth-child(1)]:lg:order-2 [&>:nth-child(2)]:lg:order-1"
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center py-12 md:auto-cols-fr [&>:nth-child(1)]:md:order-2 [&>:nth-child(2)]:md:order-1"
             >
               <motion.div 
                 initial={{ opacity: 0, x: 100 }}
@@ -177,7 +189,7 @@ export default function Home() {
                 initial={{ opacity: 0, x: 100 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+                transition={{ duration: 0.7, ease: "easeIn", delay: 0.1 }}
                 className="w-full rounded-lg overflow-hidden h-48 sm:h-64 md:h-72 lg:h-96 shadow-2xl hover:shadow-3xl transition-shadow"
               >
                 <img src={"https://nexgeninternational.org/wp-content/uploads/2020/04/group-oo-people-having-a-meeting-1367276-scaled.jpg"} alt="Personal Development" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
@@ -189,13 +201,13 @@ export default function Home() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center py-12 lg:auto-cols-fr [&>:nth-child(1)]:lg:order-2 [&>:nth-child(2)]:lg:order-1"
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center py-12 md:auto-cols-fr [&>:nth-child(1)]:md:order-2 [&>:nth-child(2)]:md:order-1"
             >
               <motion.div 
                 initial={{ opacity: 0, x: 100 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+                transition={{ duration: 0.7, ease: "easeIn", delay: 0.2 }}
                 className="w-full"
               >
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6" style={{fontFamily: "'Poppins', sans-serif"}}>Training and Mentoring?</h3>
@@ -222,7 +234,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 2.4, ease: "easeIn" }}
         className="bg-gray-50 py-24 px-4 md:px-10"
       >
         <div className="max-w-6xl mx-auto">

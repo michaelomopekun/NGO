@@ -1,7 +1,16 @@
 import { motion } from 'framer-motion';
-import defaultImage from '../assets/default-image.svg';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-export default function Projects() {
+export default function Projects() 
+{
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+
   const projects = [
     {
       title: 'UK Initiatives',

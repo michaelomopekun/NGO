@@ -11,18 +11,19 @@ export default function Header() {
   return (
     <header className="w-full flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 px-4 md:px-10 py-4 bg-white sticky top-0 z-50">
       <div className="flex items-center gap-4">
-        <div className="size-6" style={{color: 'var(--brand-teal)'}}>
-          <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
-          </svg>
-        </div>
+        <img 
+          src="https://nexgeninternational.org/wp-content/uploads/2020/07/nexgen-logo.png" 
+          alt="NexGen Logo"
+          className="h-12 w-auto"
+        />
+
         <h2 className="text-xl font-bold leading-tight tracking-tight" style={{fontFamily: "'Poppins', sans-serif"}}>
-          NexGen
+          {/* NexGen */}
         </h2>
       </div>
       
       {/* Desktop Navigation */}
-      <div className="hidden nav:flex flex-1 justify-end gap-8">
+      <div className="hidden md:flex flex-1 justify-end gap-8">
         <nav className="flex items-center gap-9">
           <Link to="/" className="text-sm font-medium leading-normal transition-colors" style={{color: 'var(--brand-dark)', '--tw-text-opacity': '1'}} onMouseEnter={(e) => e.target.style.color = 'var(--brand-teal)'} onMouseLeave={(e) => e.target.style.color = 'var(--brand-dark)'}>
             Home
@@ -54,7 +55,7 @@ export default function Header() {
       </div>
 
       {/* Mobile Menu Button */}
-      <div className="block nav:hidden">
+      <div className="md:hidden">
         <button onClick={toggleMenu} className="p-2 text-gray-600 focus:outline-none">
           {isMenuOpen ? (
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -70,7 +71,7 @@ export default function Header() {
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg nav:hidden flex flex-col p-4 gap-4">
+        <div className="absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg md:hidden flex flex-col p-4 gap-4">
           <nav className="flex flex-col gap-4">
             <Link to="/" onClick={toggleMenu} className="text-base font-medium transition-colors hover:text-[var(--brand-teal)]">
               Home

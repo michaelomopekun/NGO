@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import defaultImage from '../assets/default-image.svg';
 
 const ClientLogo = ({ name }) => (
@@ -11,7 +13,14 @@ const ClientLogo = ({ name }) => (
   </motion.div>
 );
 
-export default function Clients() {
+export default function Clients() 
+{
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const container = {
     hidden: { opacity: 0 },
     show: {

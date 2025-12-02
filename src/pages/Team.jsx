@@ -1,7 +1,17 @@
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import defaultImage from '../assets/default-image.svg';
 
-export default function Team() {
+export default function Team() 
+{
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  
   const coreTeam = [
     {
       name: 'SHOLA LANA',
