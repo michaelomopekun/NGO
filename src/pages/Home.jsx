@@ -59,7 +59,7 @@ export default function Home()
   };
 
   return (
-    <main className="flex flex-col w-full ">
+    <main className="flex flex-col w-full overflow-hidden">
       {/* Hero Section */}
         <motion.section 
           initial={{ opacity: 0 }}
