@@ -15,6 +15,7 @@ export default function Header() {
           src="https://nexgeninternational.org/wp-content/uploads/2020/07/nexgen-logo.png" 
           alt="NexGen Logo"
           className="h-12 w-auto"
+          loading='lazy'
         />
 
         <h2 className="text-xl font-bold leading-tight tracking-tight" style={{fontFamily: "'Poppins', sans-serif"}}>
